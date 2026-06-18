@@ -245,15 +245,13 @@ button:active { transform: translateY(1px); }
 /* ---------- winners ---------- */
 .winners {
   width: 100%;
-  max-width: 760px;
-  margin-top: 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  max-height: 58vh;
-  overflow-y: auto;
-  padding: 4px;
+  max-width: 1200px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  margin-top: 20px;
 }
 .winners-heading {
   font-family: "Arial Black", sans-serif;
@@ -264,13 +262,14 @@ button:active { transform: translateY(1px); }
   color: var(--orange);
   text-shadow: 0 0 30px rgba(255,107,0,.4);
   margin-bottom: 4px;
+  grid-column: 1 / -1
 }
 .winner-item {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 22px;
-  padding: 22px 28px;
+  gap: 14px;
+  padding: 10px 20px;
   background: rgba(8,8,10,.9);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -281,17 +280,30 @@ button:active { transform: translateY(1px); }
 .winner-item.in { opacity: 1; transform: none; }
 .winner-item .rank {
   font-family: "Arial Black", sans-serif;
-  font-size: clamp(34px, 5vw, 56px);
+  font-size: 38px;
   color: var(--muted);
   min-width: 64px;
 }
 .winner-item .who { flex: 1; text-align: left; }
 .winner-item .account {
-  font-size: clamp(20px, 3vw, 34px);
+  font-size: 22px;
   font-weight: 700;
   word-break: break-word;
 }
 .winner-item .tickets { font-size: clamp(13px, 1.5vw, 18px); color: var(--muted); margin-top: 4px; letter-spacing: 1px; }
+
+.prize-title {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffce4a;
+}
+
+.winner-item:not(.gold) .prize-title {
+  color: #ff9233;
+}
 
 /* the #1 winner gets the gold treatment */
 .winner-item.gold {
@@ -334,4 +346,232 @@ button:active { transform: translateY(1px); }
 @media (max-width: 640px) {
   .admin-panel { position: static; width: auto; margin: 16px; }
   .admin-panel.hidden { display: none; }
+}
+
+/* ========================================= */
+/* NEW WINNERS LAYOUT */
+/* ========================================= */
+
+.winners {
+  width: 100%;
+  max-width: 1200px;
+
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+
+  overflow: visible;
+  max-height: none;
+}
+
+.grand-title,
+.mega-title {
+
+  text-align: center;
+
+  font-family: "Arial Black", sans-serif;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 3px;
+}
+
+.grand-title {
+
+  font-size: 48px;
+
+  color: var(--gold);
+
+  text-shadow:
+    0 0 15px rgba(255,206,74,.4);
+}
+
+.mega-title {
+
+  margin-top: 10px;
+
+  font-size: 42px;
+
+  color: var(--orange);
+
+  text-shadow:
+    0 0 15px rgba(255,107,0,.4);
+}
+
+/* GRAND WINNER */
+
+.grand-card {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 25px 40px;
+
+  border-radius: 18px;
+
+  border: 2px solid var(--gold);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,206,74,.10),
+      rgba(0,0,0,.75)
+    );
+
+  box-shadow:
+    0 0 35px rgba(255,206,74,.15);
+}
+
+.grand-rank {
+
+  font-size: 90px;
+
+  font-weight: 900;
+
+  color: var(--gold);
+
+  min-width: 80px;
+}
+
+.grand-info {
+
+  flex: 1;
+
+  margin-left: 30px;
+}
+
+.grand-account {
+
+  font-size: 54px;
+
+  font-weight: 800;
+
+  color: white;
+}
+
+.grand-prize {
+
+  font-size: 42px;
+
+  font-weight: 900;
+
+  color: var(--gold);
+
+  margin-top: 5px;
+}
+
+.grand-tickets {
+
+  font-size: 32px;
+  font-weight: 700;
+
+  color: #bfbfbf;
+}
+
+/* MEGA WINNERS GRID */
+
+.mega-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+.mega-card {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 18px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,107,0,.5);
+
+  background: rgba(0,0,0,.55);
+}
+
+.mega-rank {
+
+  width: 60px;
+
+  text-align: center;
+
+  font-size: 48px;
+
+  font-weight: 900;
+
+  color: #a0a0a0;
+}
+
+.mega-info {
+
+  flex: 1;
+}
+
+.mega-account {
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  color: white;
+}
+
+.mega-prize {
+
+  color: var(--orange);
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  margin-top: 3px;
+}
+
+.mega-tickets {
+
+  margin-top: 6px;
+
+  font-size: 22px;
+
+  font-weight: 600;
+
+  color: #999;
+}
+
+/* FOOTER MESSAGE */
+
+.announcement-box {
+
+  margin-top: 15px;
+
+  padding: 30px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,107,0,.5);
+
+  background: rgba(255,107,0,.08);
+
+  text-align: center;
+
+  font-size: 25px;
+
+  line-height: 1.5;
+
+  font-weight: 600;
 }

@@ -235,27 +235,79 @@ function stopReel() {
 
 /* ---------------- winner reveal ------------------------------------------ */
 function reveal(winners) {
-  const heading = document.createElement("div");
-  heading.className = "winners-heading";
-  heading.textContent = winners.length > 1 ? "Winners" : "Winner";
-  els.winners.appendChild(heading);
 
-  winners.forEach((w, i) => {
-    const card = document.createElement("div");
-    card.className = "winner-item" + (i === 0 ? " gold" : "");
-    card.innerHTML = `
-      <div class="rank">${i + 1}</div>
-      <div class="who">
-        <div class="account">${escapeHtml(w.account)}</div>
-        <div class="tickets">${fmt(w.tickets)} tickets</div>
-      </div>`;
-    els.winners.appendChild(card);
-    // stagger the entrance + a little chime per winner
-    setTimeout(() => {
-      card.classList.add("in");
-      tone(520 + i * 40, 0.18, "triangle", 0.18);
-    }, 180 + i * 220);
-  });
+  const grandWinner = winners[0];
+  const megaWinners = winners.slice(1, 11);
+
+  els.winners.innerHTML = `
+    <div class="winners-heading">
+      WINNERS
+    </div>
+
+    <div class="grand-title">
+      GRAND JACKPOT WINNER
+    </div>
+
+    <div class="grand-card">
+
+      <div class="grand-rank">
+        1
+      </div>
+
+      <div class="grand-info">
+        <div class="grand-account">
+          ${escapeHtml(grandWinner.account)}
+        </div>
+
+        <div class="grand-prize">
+          P685,824.25
+        </div>
+      </div>
+
+      <div class="grand-tickets">
+        ${fmt(grandWinner.tickets)} tickets
+      </div>
+
+    </div>
+
+    <div class="mega-title">
+      MEGA PRIZE WINNERS
+    </div>
+
+    <div class="mega-grid">
+
+      ${megaWinners.map((w, i) => `
+        <div class="mega-card">
+
+          <div class="mega-rank">
+            ${i + 2}
+          </div>
+
+          <div class="mega-info">
+
+            <div class="mega-account">
+              ${escapeHtml(w.account)}
+            </div>
+
+            <div class="mega-prize">
+              P137,164.85
+            </div>
+
+            <div class="mega-tickets">
+              ${fmt(w.tickets)} tickets
+            </div>
+
+          </div>
+
+        </div>
+      `).join("")}
+
+    </div>
+
+    <div class="announcement-box">
+      📢 For the rest of raffle winners, kindly check our announcement and check your bonus wallet.
+    </div>
+  `;
 }
 
 function escapeHtml(s) {
