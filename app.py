@@ -8,7 +8,14 @@ import pandas as pd
 import numpy as np
 
 
-
+# ---------------------------------------------------------------------------
+# In-memory state.
+# We keep the data as two parallel arrays instead of a list of dicts:
+#   accounts  -> python list of account names      (strings)
+#   tickets   -> numpy int64 array of ticket counts (same order as accounts)
+# Parallel arrays let NumPy do the heavy math in C speed, which is what makes
+# 300k accounts / 8M tickets feel instant.
+# ---------------------------------------------------------------------------
 accounts: list[str] = []
 tickets: np.ndarray = np.array([], dtype=np.int64)
 winners_data: list[dict] = []
